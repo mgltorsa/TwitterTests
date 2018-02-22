@@ -1,4 +1,0 @@
-Consumer Key:V0Uf6qXkJeESK6Nd2GhzJhRYE
-Consumer secret:2AYlum2VKyTY8DTS9zWSJspkVL2VU1q94DEebbWxbumOIschD3
-Access token:279285283-2zDiNkw0br0gmI9nhnjXdtKtGaFim9nBgAyGvZuz
-Access token Secret:ZmQ3qQcm0vwLpxY02JVN6wxLPEj47XYlbSbaK0sAWyzsi

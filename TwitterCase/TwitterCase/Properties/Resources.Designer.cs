@@ -61,15 +61,12 @@ namespace TwitterCase.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Consumer Key:V0Uf6qXkJeESK6Nd2GhzJhRYE
-        ///Consumer secret:2AYlum2VKyTY8DTS9zWSJspkVL2VU1q94DEebbWxbumOIschD3
-        ///Access token:279285283-2zDiNkw0br0gmI9nhnjXdtKtGaFim9nBgAyGvZuz
-        ///Access token Secret:ZmQ3qQcm0vwLpxY02JVN6wxLPEj47XYlbSbaK0sAWyzsi
-        ///.
+        ///   Busca un recurso adaptado de tipo System.Byte[].
         /// </summary>
-        internal static string Keys {
+        internal static byte[] Keys {
             get {
-                return ResourceManager.GetString("Keys", resourceCulture);
+                object obj = ResourceManager.GetObject("Keys", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }
