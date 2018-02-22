@@ -55,18 +55,27 @@ namespace TwitterCase
         public void SearchTweets(string query)
         {
 
-            ISearchResult ItwsearchResult = Search.SearchTweetsWithMetadata(query);
+            ISearchTweetsParameters searchParameter = new SearchTweetsParameters(query)
+            {
+                MaximumNumberOfResults = 500,
+                
+            };
+
+            ISearchResult ItwsearchResult = Search.SearchTweetsWithMetadata(searchParameter);
             IEnumerable<ITweetWithSearchMetadata> tweets = ItwsearchResult.Tweets;
-            UpdateTweets(tweets);
+            UpdateTextBoxTweets delegateMethod = new UpdateTextBoxTweets(UpdateTweets);
+            this.Invoke(delegateMethod, tweets);
 
         }
+
+        public delegate void UpdateTextBoxTweets(IEnumerable<ITweetWithSearchMetadata> tweets);
 
         private void UpdateTweets(IEnumerable<ITweetWithSearchMetadata> tweets)
         {
             if (tweets != null && tweets.Count() > 0)
             {
                 currentTweets = tweets;
-
+                lbTotalTweets.Text = "Total tweets: " + currentTweets.ToArray().Length;
                 ITweetWithSearchMetadata currentTweet = currentTweets.ElementAt(index = 0);
                 UpdateCurrentTweet(currentTweet);
             }
@@ -84,7 +93,7 @@ namespace TwitterCase
             string retweetCount = tweet.RetweetCount + "";
             int length = tweet.CalculateLength(true);
             lbCharacterCount.Text = "Caracteres: " + length;
-            tbTweet.Text = "Usuario:" + tweetUser + "\r\n" + tweetText + "\r\n" + "Lugar: " + tweetPlace + "\r\n" + "Retweets: " + retweetCount;
+            tbTweet.Text = "Usuario: " + tweetUser + "\r\n" + tweetText + "\r\n" + "Lugar: " + tweetPlace + "\r\n" + "Retweets: " + retweetCount;
 
         }
 
@@ -128,24 +137,27 @@ namespace TwitterCase
                 Thread threadSearch = new Thread(ThreadSearchTweets(query));
                 threadSearch.Start();
                 int i = 1;
+                UpdateLoadLabel delegateMethod = new UpdateLoadLabel(ChangeValueLoadLabel);
                 while (threadSearch.IsAlive)
                 {
-                    UpdateLoadLabel(i);
+                    this.Invoke(delegateMethod, i);
                     ++i;
-                    Thread.Sleep(150);
+                    Thread.Sleep(300);
 
                 }
             }
         }
 
-        private void UpdateLoadLabel(int load)
+        public delegate void UpdateLoadLabel(int load);
+
+        internal void ChangeValueLoadLabel(int load)
         {
-            
+
             lock (this)
             {
                 if ((load % 2) == 1) lbLoadTweets.Text = "Cargando.";
-                else if ((load % 2) == 0) lbLoadTweets.Text += "Cargando..";
-                else if ((load % 3) == 0) lbLoadTweets.Text += "Cargando...";
+                else if ((load % 2) == 0) lbLoadTweets.Text = "Cargando..";
+                else if ((load % 3) == 0) lbLoadTweets.Text = "Cargando...";
             }
         }
 

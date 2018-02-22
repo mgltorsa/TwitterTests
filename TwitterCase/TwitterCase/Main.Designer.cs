@@ -42,6 +42,7 @@ namespace TwitterCase
             this.lbKeyword = new System.Windows.Forms.Label();
             this.lbCharacterCount = new System.Windows.Forms.Label();
             this.lbLoadTweets = new System.Windows.Forms.Label();
+            this.lbTotalTweets = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btSearch
@@ -66,15 +67,16 @@ namespace TwitterCase
             this.tbTweet.Location = new System.Drawing.Point(34, 118);
             this.tbTweet.Multiline = true;
             this.tbTweet.Name = "tbTweet";
+            this.tbTweet.ReadOnly = true;
             this.tbTweet.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbTweet.Size = new System.Drawing.Size(220, 102);
             this.tbTweet.TabIndex = 2;
             // 
             // btBack
             // 
-            this.btBack.Location = new System.Drawing.Point(59, 226);
+            this.btBack.Location = new System.Drawing.Point(32, 226);
             this.btBack.Name = "btBack";
-            this.btBack.Size = new System.Drawing.Size(75, 23);
+            this.btBack.Size = new System.Drawing.Size(44, 23);
             this.btBack.TabIndex = 3;
             this.btBack.Text = "<--";
             this.btBack.UseVisualStyleBackColor = true;
@@ -82,9 +84,9 @@ namespace TwitterCase
             // 
             // btNext
             // 
-            this.btNext.Location = new System.Drawing.Point(140, 226);
+            this.btNext.Location = new System.Drawing.Point(82, 226);
             this.btNext.Name = "btNext";
-            this.btNext.Size = new System.Drawing.Size(75, 23);
+            this.btNext.Size = new System.Drawing.Size(50, 23);
             this.btNext.TabIndex = 4;
             this.btNext.Text = "-->";
             this.btNext.UseVisualStyleBackColor = true;
@@ -116,11 +118,21 @@ namespace TwitterCase
             this.lbLoadTweets.Size = new System.Drawing.Size(0, 13);
             this.lbLoadTweets.TabIndex = 7;
             // 
+            // lbTotalTweets
+            // 
+            this.lbTotalTweets.AutoSize = true;
+            this.lbTotalTweets.Location = new System.Drawing.Point(174, 236);
+            this.lbTotalTweets.Name = "lbTotalTweets";
+            this.lbTotalTweets.Size = new System.Drawing.Size(65, 13);
+            this.lbTotalTweets.TabIndex = 8;
+            this.lbTotalTweets.Text = "Total tweets";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.lbTotalTweets);
             this.Controls.Add(this.lbLoadTweets);
             this.Controls.Add(this.lbCharacterCount);
             this.Controls.Add(this.lbKeyword);
@@ -150,5 +162,6 @@ namespace TwitterCase
         private int index;
         private Label lbCharacterCount;
         private Label lbLoadTweets;
+        private Label lbTotalTweets;
     }
 }
